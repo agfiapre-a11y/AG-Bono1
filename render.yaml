@@ -1,37 +1,18 @@
 services:
+  # ── Backend API (NestJS) ──────────────────────────────────────────────────
   - type: web
-    name: paradise-ag-api
+    name: cims-api
     runtime: docker
     plan: free
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /api
     envVars:
       - key: NODE_ENV
         value: production
       - key: PORT
         value: 3000
       - key: DATABASE_URL
-        fromDatabase:
-          name: paradise-ag-db
-          property: connectionString
-      - key: DB_HOST
-        fromDatabase:
-          name: paradise-ag-db
-          property: host
-      - key: DB_PORT
-        fromDatabase:
-          name: paradise-ag-db
-          property: port
-      - key: DB_USERNAME
-        fromDatabase:
-          name: paradise-ag-db
-          property: user
-      - key: DB_PASSWORD
-        fromDatabase:
-          name: paradise-ag-db
-          property: password
-      - key: DB_DATABASE
-        fromDatabase:
-          name: paradise-ag-db
-          property: database
+        value: "postgresql://postgres.dbmbkevspcozcnhcsyii:Ag%402026_2027@aws-0-eu-central-1.pooler.supabase.com:6543/postgres"
       - key: JWT_SECRET
         value: "89d056a20e32a303b0276ae7e2c6358ab9464fb7c330a69a40cdae586e90d06d617105406e7542f8b610e564beeef651d8d07828c25fe98b518af3c53bc78951"
       - key: JWT_EXPIRES_IN
@@ -39,13 +20,25 @@ services:
       - key: JWT_REFRESH_EXPIRES_IN
         value: 7d
       - key: CORS_ORIGIN
-        value: "https://paradise-ag.netlify.app"
+        value: "https://cims.onrender.com"
       - key: SUPABASE_URL
         value: "https://dbmbkevspcozcnhcsyii.supabase.co"
       - key: SUPABASE_ANON_KEY
         value: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRibWJrZXZzcGNvemNuaGNzeWlpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM3ODczNTUsImV4cCI6MjA5OTM2MzM1NX0.7W2hZ0QIBYdpZ4tYh_wl7M3SpP9NzD7QWO90QHk5FDo"
+      - key: NODE_OPTIONS
+        value: "--dns-result-order=ipv4first"
 
-databases:
-  - name: paradise-ag-db
-    databaseName: paradise_ag
-    ipAllowList: []
+  # ── Frontend (Flutter Web — Static Site) ──────────────────────────────────
+  - type: web
+    name: cims-frontend
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile.frontend
+    healthCheckPath: /
+    envVars:
+      - key: API_BASE_URL
+        value: "https://cims-api.onrender.com/api"
+      - key: SUPABASE_URL
+        value: "https://dbmbkevspcozcnhcsyii.supabase.co"
+      - key: SUPABASE_ANON_KEY
+        value: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRibWJrZXZzcGNvemNuaGNzeWlpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM3ODczNTUsImV4cCI6MjA5OTM2MzM1NX0.7W2hZ0QIBYdpZ4tYh_wl7M3SpP9NzD7QWO90QHk5FDo"
