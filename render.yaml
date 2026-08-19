@@ -20,7 +20,7 @@ services:
       - key: JWT_REFRESH_EXPIRES_IN
         value: 7d
       - key: CORS_ORIGIN
-        value: "https://cims.onrender.com"
+        value: "https://paradise.onrender.com"
       - key: SUPABASE_URL
         value: "https://dbmbkevspcozcnhcsyii.supabase.co"
       - key: SUPABASE_ANON_KEY
@@ -30,7 +30,7 @@ services:
 
   # ── Frontend (Flutter Web — Static Site) ──────────────────────────────────
   - type: web
-    name: cims-frontend
+    name: paradise
     runtime: docker
     plan: free
     dockerfilePath: ./Dockerfile.frontend
