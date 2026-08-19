@@ -1864,6 +1864,18 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           fontSize: 16, fontWeight: FontWeight.w600)),
             ),
           ),
+          if (_loading)
+            Padding(
+              padding: const EdgeInsets.only(top: 10),
+              child: Text(
+                'Connecting to server…',
+                textAlign: TextAlign.center,
+                style: GoogleFonts.poppins(
+                  fontSize: 12,
+                  color: Colors.grey[500],
+                ),
+              ),
+            ),
           const SizedBox(height: 16),
           Center(
             child: TextButton(

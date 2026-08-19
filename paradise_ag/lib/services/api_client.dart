@@ -21,10 +21,12 @@ class ApiClient {
   /// Default timeout for regular API requests.
   static const defaultTimeout = Duration(seconds: 30);
 
-  /// Timeout for auth requests (login, register). Generous enough to
-  /// survive a Render free-tier cold start, which can take 30-60+ seconds
-  /// when the backend has spun down after inactivity.
-  static const authTimeout = Duration(seconds: 60);
+  /// Timeout for auth requests (login, register).
+  /// Kept short so users aren't stuck spinning during a Render free-tier
+  /// cold start. If the backend is asleep, we fall back to local login
+  /// quickly; the backend wakes up in the background and subsequent
+  /// logins will hit the live API.
+  static const authTimeout = Duration(seconds: 12);
 
   /// Storage key for persisted auth tokens (must match AuthTokenManager).
   static const _tokenKey = 'auth_tokens';
