@@ -7,7 +7,6 @@ import {
   Body,
   Param,
   ParseUUIDPipe,
-  Query,
 } from '@nestjs/common';
 import { AttendanceService } from './attendance.service';
 import {
@@ -44,11 +43,7 @@ export class AttendanceController {
   findAll(
     @CurrentUser() user: AuthenticatedUser,
     @Param('tenantId', ParseUUIDPipe) tenantId: string,
-    @Query('branchId') branchId?: string,
   ) {
-    if (branchId) {
-      return this.attendanceService.findByBranch(user, tenantId, branchId);
-    }
     return this.attendanceService.findAll(user, tenantId);
   }
 

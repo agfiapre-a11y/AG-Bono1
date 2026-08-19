@@ -36,18 +36,6 @@ export class AttendanceService {
     });
   }
 
-  findByBranch(
-    user: AuthenticatedUser,
-    tenantId: string,
-    branchId: string,
-  ): Promise<AttendanceRecord[]> {
-    this.ensureTenantScope(user, tenantId);
-    return this.repo.find({
-      where: { tenantId, branchId, isActive: true },
-      order: { date: 'DESC', createdAt: 'DESC' },
-    });
-  }
-
   async findOne(
     user: AuthenticatedUser,
     tenantId: string,
@@ -67,7 +55,6 @@ export class AttendanceService {
     this.ensureTenantScope(user, tenantId);
     const record = this.repo.create({
       tenantId,
-      branchId: dto.branchId,
       serviceType: dto.serviceType,
       date: new Date(dto.date),
       presentMemberIds: [],

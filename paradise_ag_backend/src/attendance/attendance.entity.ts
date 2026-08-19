@@ -16,9 +16,6 @@ export class AttendanceRecord {
   @Index()
   tenantId: string;
 
-  @Column({ name: 'branch_id', type: 'uuid', nullable: true })
-  branchId: string | null;
-
   @Column({ name: 'service_type', type: 'varchar', length: 100 })
   serviceType: string;
 

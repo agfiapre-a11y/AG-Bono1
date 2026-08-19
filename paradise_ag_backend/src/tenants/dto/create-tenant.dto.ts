@@ -54,10 +54,6 @@ export class CreateTenantDto {
   @IsOptional()
   maxMembers?: number;
 
-  @IsInt()
-  @IsOptional()
-  maxBranches?: number;
-
   @IsString()
   @IsOptional()
   @IsIn(['basic', 'standard', 'premium'])

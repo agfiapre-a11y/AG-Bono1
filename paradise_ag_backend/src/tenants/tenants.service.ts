@@ -27,7 +27,6 @@ export class TenantsService {
       primaryColor: dto.primaryColor ?? '#2E7D32',
       secondaryColor: dto.secondaryColor ?? '#FFD600',
       maxMembers: dto.maxMembers ?? 500,
-      maxBranches: dto.maxBranches ?? 5,
       enabledModules: dto.enabledModules ?? ['members', 'attendance', 'finance', 'sermons', 'events', 'welfare'],
       isActive: true,
     });
@@ -121,7 +120,6 @@ export class TenantsService {
       twitterUrl: tenant.twitterUrl,
       enabledModules: tenant.enabledModules,
       maxMembers: tenant.maxMembers,
-      maxBranches: tenant.maxBranches,
     };
   }
 }

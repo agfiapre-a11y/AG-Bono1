@@ -45,9 +45,6 @@ export class Tenant {
   @Column({ name: 'max_members', type: 'int', default: 500 })
   maxMembers: number;
 
-  @Column({ name: 'max_branches', type: 'int', default: 5 })
-  maxBranches: number;
-
   // Subscription tracking
   @Column({ name: 'subscription_tier', type: 'varchar', length: 50, default: 'basic' })
   subscriptionTier: string;

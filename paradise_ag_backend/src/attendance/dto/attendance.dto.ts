@@ -10,9 +10,6 @@ import {
 
 export class CreateAttendanceDto {
   @IsString()
-  branchId: string;
-
-  @IsString()
   serviceType: string;
 
   @IsDateString()
